@@ -1,4 +1,4 @@
-#include <iostream>
+#include "bayan.h"
 /**
  * @file main.cpp 
  * 
@@ -10,5 +10,8 @@
 * @return возвращает код ошибки
 */
 int main(int, char**){
-    std::cout << "Hello, from Bayan!\n";
+    
+    bayan a;
+    a.run();
+    return 0;
 }

@@ -4,13 +4,25 @@ set(PROJECT_VESRION 0.0.${PATCH_VERSION})
 project(bayan VERSION ${PROJECT_VESRION})
 configure_file(version.h.in version.h) 
 
-include_directories(include include/base include/base/inter)
+find_package( Boost COMPONENTS chrono program_options REQUIRED )
+include_directories( ${Boost_INCLUDE_DIR} )
+
+include_directories(include)
+
+set(LIB_NAME ${CMAKE_PROJECT_NAME}_lib)
+add_library(${LIB_NAME} src/bayan.cpp)
+target_link_libraries(${LIB_NAME}  ${Boost_LIBRARIES})
 
 add_executable(bayan src/main.cpp)
-set_target_properties(bayan PROPERTIES
+set_target_properties(bayan ${LIB_NAME} PROPERTIES
     CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
 )
+
+
+target_link_libraries(bayan PRIVATE ${LIB_NAME})
+
+add_definitions(-D_SCL_SECURE_NO_WARNINGS)
 
 install(TARGETS bayan RUNTIME DESTINATION bin)
 
