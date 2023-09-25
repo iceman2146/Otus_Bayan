@@ -1,22 +1,40 @@
 #include "bayan.h"
 
 
-bayan::bayan()
-{
-   
-}
 void bayan::run()
 {
-boost::chrono::system_clock::time_point start = boost::chrono::system_clock::now();
-
-   for ( long i = 0; i < 10000000; ++i )
-    std::sqrt( 123.456L ); // burn some time
-
-    boost::chrono::duration<double> sec = boost::chrono::system_clock::now() - start;
-    std::cout << "took " << sec.count() << " seconds\n";
+    boost::filesystem::directory_iterator begin("./");
+    boost::filesystem::directory_iterator end;
+    for (; begin != end; ++begin)
+    {
+        boost::filesystem::file_status fs = boost::filesystem::status(*begin);
+        {
+            switch (fs.type())
+            {
+            case boost::filesystem::regular_file:
+                std::cout << "FILE ";
+                break;
+            case boost::filesystem::symlink_file:
+                    std::cout
+                << "SYMLINK ";
+                break;
+                case boost::filesystem::directory_file:
+                std::cout << "DIRECTORY ";
+                break;
+            default:
+                std::cout << "OTHER ";
+                break;
+            }
+            if (fs.permissions() & boost::filesystem::owner_write)
+            {
+                std::cout << "W ";
+            }
+            else
+            {
+                std::cout << " ";
+            }
+            std::cout << *begin << '\n';
+        } /*for*/
+    }
 }
 
-bayan::~bayan()
-{
-
-}

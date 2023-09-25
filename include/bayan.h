@@ -1,13 +1,18 @@
 #pragma once
 #include <boost/chrono.hpp>
+#include <boost/filesystem.hpp>
+#include <boost/filesystem/operations.hpp>
+#include <vector>
+#include <string>
+
 #include <iostream>
-#include <cmath>
+
 
 class bayan
 {
 public:
-    bayan();
-    ~bayan();
+    bayan()=default;
+    ~bayan()=default;
     void run();
 private:
 
