@@ -4,7 +4,7 @@ set(PROJECT_VESRION 0.0.${PATCH_VERSION})
 project(bayan VERSION ${PROJECT_VESRION})
 configure_file(version.h.in version.h) 
 
-find_package( Boost COMPONENTS chrono filesystem REQUIRED )
+find_package( Boost COMPONENTS chrono filesystem program_options REQUIRED )
 include_directories( ${Boost_INCLUDE_DIR} )
 
 include_directories(include)
