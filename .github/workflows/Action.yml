@@ -14,6 +14,7 @@ jobs:
     permissions: write-all
     steps:
       - uses: actions/checkout@v2
+      - run: sudo apt-get update && sudo apt-get install libboost-test-dev libpthread-stubs0-dev libgtest-dev -y
       - run: cmake .
       - run: cmake --build .
       - run: cmake --build . --target package
